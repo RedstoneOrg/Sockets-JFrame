@@ -39,6 +39,7 @@ public class ServerThread extends Thread {
                         String json = Utils.stream(1, PacketIds.NAME_INFORMATION,"Olá", console);
                         String json2 = Utils.stream(1, PacketIds.NAME_INFORMATION,"Eu sou", console);
                         String json3 = Utils.stream(1, PacketIds.NAME_INFORMATION,"o " + PacketIds.NAME_INFORMATION, console);
+                        String objected = Utils.stream(1, PacketIds.NAME_INFORMATION,"o " + PacketIds.NAME_INFORMATION, 3, console);
 
                         DataOutputStream outstream = new DataOutputStream(socket.getOutputStream());
 
@@ -46,6 +47,7 @@ public class ServerThread extends Thread {
                                 new SendPacketThread(console, json, outstream),
                                 new SendPacketThread(console, json2, outstream),
                                 new SendPacketThread(console, json3, outstream),
+                                new SendPacketThread(console, objected, outstream),
                         };
 
                         for(int i = 0; i < packetThreads.length; i++){

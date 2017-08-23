@@ -10,6 +10,7 @@ public class ProcessThread extends Thread{
     private String name;
     private Packet packet;
 
+    private Object infomartion;
     private Object object;
 
     private Console console;
@@ -32,11 +33,12 @@ public class ProcessThread extends Thread{
         switch(id){
             case PacketIds.TYPE_INFORMATION:
 
-                object = packet.getInformation();
+                infomartion = packet.getInformation();
+                object = packet.getObject();
 
-                console.addText("ID: " + packet.getId());
-                console.addText("Nome: " + packet.getName());
-                console.addText("Informação: " + String.valueOf(object));
+                console.addText("ID: " + packet.getId() + " Nome: " + packet.getName() +
+                        " " + "Informação: " + String.valueOf(infomartion) +
+                        " " + "Objeto: " + object);
 
                 break;
         }

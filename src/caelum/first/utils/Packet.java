@@ -6,6 +6,8 @@ public class Packet {
     private String name;
     private String information;
 
+    private Object object;
+
     public void setId(int id) {
         this.id = id;
     }
@@ -18,6 +20,10 @@ public class Packet {
         this.information = information;
     }
 
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
     public int getId() {
         return id;
     }
@@ -28,5 +34,9 @@ public class Packet {
 
     public String getInformation() {
         return information;
+    }
+
+    public Object getObject() {
+        return object;
     }
 }

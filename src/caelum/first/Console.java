@@ -22,13 +22,14 @@ public class Console extends JFrame {
         super("Console");
         this.type = type;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 300);
+        setSize(650, 300);
         setLocationRelativeTo(null);
 
         textArea = new JTextArea(area);
         textArea.setLineWrap(true); //quebra de linha automática
         textArea.setEditable(false);
         textArea.addKeyListener(new KeyT(this));
+        textArea.setFont(new Font("Consolas", Font.BOLD, 14));
 
 
         JScrollPane scroll = new JScrollPane(textArea);
