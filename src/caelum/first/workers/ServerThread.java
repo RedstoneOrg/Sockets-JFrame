@@ -36,18 +36,16 @@ public class ServerThread extends Thread {
                         console.addText("Client: " + socket.getInetAddress().getHostAddress());
                         sleep(2 * 1000);
 
-                        String json = Utils.stream(1, PacketIds.NAME_INFORMATION,"Olá", console);
-                        String json2 = Utils.stream(1, PacketIds.NAME_INFORMATION,"Eu sou", console);
-                        String json3 = Utils.stream(1, PacketIds.NAME_INFORMATION,"o " + PacketIds.NAME_INFORMATION, console);
-                        String objected = Utils.stream(1, PacketIds.NAME_INFORMATION,"o " + PacketIds.NAME_INFORMATION, 3, console);
+                        String popup = Utils.stream(2, PacketIds.NAME_SHOW, "Pequeno POPUP", "Request", console);
+                        String process = Utils.stream(3, PacketIds.NAME_PROCESS, null, 3, console);
+                        String bytes = Utils.stream(4, PacketIds.NAME_BYTES, "Hello".getBytes(), "Hello".getBytes().length, console);
 
                         DataOutputStream outstream = new DataOutputStream(socket.getOutputStream());
 
                         SendPacketThread[] packetThreads = new SendPacketThread[]{
-                                new SendPacketThread(console, json, outstream),
-                                new SendPacketThread(console, json2, outstream),
-                                new SendPacketThread(console, json3, outstream),
-                                new SendPacketThread(console, objected, outstream),
+                                new SendPacketThread(console, popup, outstream),
+                                new SendPacketThread(console, process, outstream),
+                                new SendPacketThread(console, bytes, outstream),
                         };
 
                         for(int i = 0; i < packetThreads.length; i++){

@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class Console extends JFrame {
@@ -29,13 +28,19 @@ public class Console extends JFrame {
         textArea.setLineWrap(true); //quebra de linha automática
         textArea.setEditable(false);
         textArea.addKeyListener(new KeyT(this));
+        textArea.setBackground(Color.BLACK);
         textArea.setFont(new Font("Consolas", Font.BOLD, 14));
+        textArea.setForeground(Color.WHITE);
 
 
         JScrollPane scroll = new JScrollPane(textArea);
 
         //add(textArea);
         getContentPane().add(scroll);
+    }
+
+    public JTextArea getText(){
+        return textArea;
     }
 
     public void gui(){

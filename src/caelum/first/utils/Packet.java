@@ -8,6 +8,9 @@ public class Packet {
 
     private Object object;
 
+    private byte[] bytes;
+    private int length;
+
     public void setId(int id) {
         this.id = id;
     }
@@ -24,6 +27,14 @@ public class Packet {
         this.object = object;
     }
 
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
     public int getId() {
         return id;
     }
@@ -38,5 +49,13 @@ public class Packet {
 
     public Object getObject() {
         return object;
+    }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public int getLength() {
+        return length;
     }
 }
