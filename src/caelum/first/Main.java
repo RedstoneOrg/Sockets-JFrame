@@ -1,12 +1,17 @@
 package caelum.first;
 
 
+import caelum.first.utils.Utils;
+
 import javax.swing.*;
+import java.io.*;
 import java.util.*;
 
 public class Main {
 
     private static final Scanner scan = new Scanner(System.in);
+
+    public final static String PATH = System.getProperty("user.dir") + "/";
 
     public static void main(String[] args) {
 

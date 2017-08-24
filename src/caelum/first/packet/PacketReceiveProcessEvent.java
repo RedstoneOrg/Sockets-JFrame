@@ -21,10 +21,11 @@ public class PacketReceiveProcessEvent extends PacketEvent implements PacketIds{
                 console.addText("Erro: " + e.getMessage());
             }
             String recv = "";
+            boolean recv2 = true;
 
             switch(getPacket().getId()) {
                 case TYPE_BATCH:
-                    recv = NAME_BATCH;
+                    recv2 = false;
                     break;
                 case TYPE_INFORMATION:
                     recv = NAME_INFORMATION;
@@ -38,8 +39,13 @@ public class PacketReceiveProcessEvent extends PacketEvent implements PacketIds{
                 case TYPE_BYTES:
                     recv = NAME_BYTES;
                     break;
+                case TYPE_FILE:
+                    recv = NAME_FILE;
+                    break;
             }
-            console.addText("Recebido: " + recv);
+            if(recv2) {
+                console.addText("Recebido: " + recv);
+            }
         }).start();
     }
 }

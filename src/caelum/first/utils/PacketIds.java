@@ -17,4 +17,7 @@ public interface PacketIds extends PacketSubIds{
     int TYPE_BYTES = 4;
     String NAME_BYTES = "BytesPacket";
 
+    int TYPE_FILE = 5;
+    String NAME_FILE = "FileInputPacket";
+
 }

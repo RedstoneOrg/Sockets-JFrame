@@ -5,9 +5,7 @@ import caelum.first.utils.PacketIds;
 import caelum.first.utils.Utils;
 import caelum.first.workers.process.SendPacketThread;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -55,10 +53,16 @@ public class ServerThread extends Thread implements PacketIds {
                                 new SendPacketThread(console, bytes, outstream),
                         };
 
-                        for(int i = 0; i < packetThreads.length; i++){
+                        for(int i = 0; i < packetThreads.length; i++) {
                             sleep(1);
                             packetThreads[i].start();
                         }
+
+                        do {
+                            sleep(3 * 1000);
+                            String connection = Utils.stream(TYPE_BATCH, NAME_BATCH, null, null);
+                            new SendPacketThread(console, connection, outstream).start();
+                        } while(socket.isConnected() && socket.getInputStream() != null);
 
                     } catch (Exception e){
                         console.addText("Erro!\n" + e.getMessage());

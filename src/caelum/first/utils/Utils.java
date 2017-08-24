@@ -3,6 +3,9 @@ package caelum.first.utils;
 import caelum.first.Console;
 import com.google.gson.Gson;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 public class Utils {
 
     public static String stream(int id, String nome, String information, Console console){
@@ -41,6 +44,7 @@ public class Utils {
         if(console != null) console.addText("Gerado: " + json);
         return json;
     }
+
 
 
 }
