@@ -20,4 +20,7 @@ public interface PacketIds extends PacketSubIds{
     int TYPE_FILE = 5;
     String NAME_FILE = "FileInputPacket";
 
+    int TYPE_DISCONNECT = 6;
+    String NAME_DISCONNECT = "DisconnectPacket";
+
 }

@@ -28,10 +28,14 @@ public class Main {
             Console console2 = new Console(1);
             console2.setVisible(true);
             console2.gui();
+            console2.addButtons();
         } else {
             Console console = new Console((int) type);
             console.setVisible(true);
             console.gui();
+            if((int) type == 1){
+                console.addButtons();
+            }
         }
     }
 

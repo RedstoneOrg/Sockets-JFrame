@@ -71,6 +71,9 @@ public class ProcessThread extends Thread{
                     break;
                 case PacketIds.TYPE_FILE:
                     break;
+                case PacketIds.TYPE_DISCONNECT:
+                    System.exit(0);
+                    break;
             }
         } catch (Exception e){
             console.addText("Erro: " + e.getMessage());

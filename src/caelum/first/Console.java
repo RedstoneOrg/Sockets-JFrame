@@ -9,6 +9,8 @@ import caelum.first.workers.process.SendPacketThread;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.DataOutputStream;
@@ -20,6 +22,8 @@ public class Console extends JFrame {
 
     private JTextArea textArea;
     private Thread thread;
+
+    private Console frame;
 
     private int type;
     private String area = "";
@@ -44,10 +48,42 @@ public class Console extends JFrame {
 
         //add(textArea);
         getContentPane().add(scroll);
+
+        frame = this;
     }
 
     public JTextArea getText(){
         return textArea;
+    }
+
+    public void addButtons(){
+        JButton button = new JButton("Desligar");
+        button.setForeground(Color.RED);
+        button.setFont(new Font("Consolas", Font.BOLD, 13));
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == button){
+                    frame.addText("Botão foi clicado");
+                    if(thread instanceof ServerThread){
+                        try {
+                            if(((ServerThread) thread).socket.isConnected()) {
+                                frame.addText("Desligando Conexões");
+                                String json = Utils.stream(PacketIds.TYPE_DISCONNECT, PacketIds.NAME_DISCONNECT, null, null);
+                                new SendPacketThread(null, json, ((ServerThread) thread).outstream).start();
+                                Thread.sleep(12);
+                                ((ServerThread) thread).socket.close();
+                                System.exit(0);
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+        getContentPane().add(button, BorderLayout.WEST);
     }
 
     public void gui(){
@@ -164,6 +200,7 @@ public class Console extends JFrame {
                             return;
                         }
                         this.frame.setFont(new Font("Consolas", Font.BOLD, id));
+                        frame.textArea.setText(area);
                         break;
                 }
             }
