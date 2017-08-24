@@ -16,6 +16,8 @@ public class ServerThread extends Thread implements PacketIds {
     private Console console;
     public Socket socket;
 
+    public DataOutputStream outstream;
+
     public ServerThread(InetSocketAddress inetSocketAddress, Console console) {
         this.address = inetSocketAddress;
         this.console = console;
@@ -44,7 +46,7 @@ public class ServerThread extends Thread implements PacketIds {
                         String bytes = Utils.stream(TYPE_BYTES, NAME_BYTES,
                                 "Hello".getBytes(), "Hello".getBytes().length, console);
 
-                        DataOutputStream outstream = new DataOutputStream(socket.getOutputStream());
+                        outstream = new DataOutputStream(socket.getOutputStream());
 
                         SendPacketThread[] packetThreads = new SendPacketThread[]{
                                 new SendPacketThread(console, popup, outstream),
@@ -57,6 +59,8 @@ public class ServerThread extends Thread implements PacketIds {
                             sleep(1);
                             packetThreads[i].start();
                         }
+
+                        console.addText("\nEnviar pacotes customizados com CTRL + 0\n\n");
 
                         do {
                             sleep(3 * 1000);

@@ -55,11 +55,9 @@ public class ProcessThread extends Thread{
                 case PacketIds.TYPE_SHOW:
                     switch(subId){
                         case PacketIds.TYPE_SHOW_DISPLAY:
-                            console.addText("Request de " + PacketIds.NAME_SHOW, 2);
                             JOptionPane.showMessageDialog(null, information, (String) object, 1);
                             break;
                         case PacketIds.TYPE_SHOW_CONSOLE:
-                            console.addText("Request de " + PacketIds.NAME_SHOW, 2);
                             console.addText("Info: " + information, 2);
                             break;
                     }
