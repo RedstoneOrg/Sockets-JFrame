@@ -28,12 +28,10 @@ public class ClientThread extends Thread {
     public void run() {
         try {
             console.addText("Conectando...");
-            sleep(2 * 1000);
             socket = new Socket("127.0.0.1", 24464);
             console.addText("Conectado.");
-            sleep(2 * 1000);
 
-            while (socket.getInputStream() != null){
+            while (socket.isConnected() && socket.getInputStream() != null){
                 DataInputStream inputStream = new DataInputStream(socket.getInputStream());
                 String utf = inputStream.readUTF();
                 Gson gson = new Gson();
@@ -42,8 +40,6 @@ public class ClientThread extends Thread {
                 sleep(1);
                 new ProcessThread(console, packet).start();
             }
-
-            sleep(2 * 1000);
         } catch (Exception e){
             console.addText("Erro!\n" + e.getMessage());
         }

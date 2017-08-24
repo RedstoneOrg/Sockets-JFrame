@@ -3,6 +3,8 @@ package caelum.first.utils;
 public class Packet {
 
     private int id;
+    private int subId;
+
     private String name;
     private String information;
 
@@ -13,6 +15,10 @@ public class Packet {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setSubId(int subId) {
+        this.subId = subId;
     }
 
     public void setName(String name) {
@@ -37,6 +43,10 @@ public class Packet {
 
     public int getId() {
         return id;
+    }
+
+    public int getSubId() {
+        return subId;
     }
 
     public String getName() {

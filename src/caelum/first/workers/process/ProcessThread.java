@@ -12,6 +12,7 @@ import java.awt.*;
 public class ProcessThread extends Thread{
 
     private int id;
+    private int subId;
     private String name;
     private Packet packet;
 
@@ -24,6 +25,7 @@ public class ProcessThread extends Thread{
         this.console = console;
 
         this.id = packet.getId();
+        this.subId = packet.getSubId();
         this.name = packet.getName();
         this.packet = packet;
     }
@@ -31,32 +33,38 @@ public class ProcessThread extends Thread{
     @Override
     public void run() {
         try {
-            sleep(1);
 
             information = packet.getInformation();
             object = packet.getObject();
 
             new PacketReceiveProcessEvent(console, packet);
 
-            sleep(4);
+            sleep(20);
             switch (id) {
                 case PacketIds.TYPE_INFORMATION:
                     console.addText("ID: " + packet.getId() + " Nome: " + packet.getName() +
                             " " + "Informação: " + String.valueOf(information) +
-                            " " + "Objeto: " + object);
+                            " " + "Objeto: " + object, 2);
 
                     break;
                 case PacketIds.TYPE_SHOW:
-                    console.addText("Request de " + PacketIds.NAME_SHOW);
-                    JOptionPane.showMessageDialog(null, information, (String) object, 1);
-                    sleep(3);
+                    switch(subId){
+                        case PacketIds.TYPE_SHOW_DISPLAY:
+                            console.addText("Request de " + PacketIds.NAME_SHOW, 2);
+                            JOptionPane.showMessageDialog(null, information, (String) object, 1);
+                            break;
+                        case PacketIds.TYPE_SHOW_CONSOLE:
+                            console.addText("Request de " + PacketIds.NAME_SHOW, 2);
+                            console.addText("Info: " + information, 2);
+                            break;
+                    }
                     break;
                 case PacketIds.TYPE_PROCESS:
                     new PacketProcessEvent(console, packet);
                     break;
                 case PacketIds.TYPE_BYTES:
                     String x = new String(packet.getBytes(), "UTF-8");
-                    console.addText("Bytes: " + x);
+                    console.addText("Bytes: " + x, 2);
                     break;
             }
         } catch (Exception e){

@@ -16,7 +16,7 @@ public class PacketProcessEvent extends PacketEvent {
 
     private void onRun(){
         new Thread(() -> {
-            console.addText("Thread > PacketProcess is Running");
+            console.addText("Thread > PacketProcess is Running", 120);
         }).start();
     }
 }

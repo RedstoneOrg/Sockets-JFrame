@@ -16,7 +16,7 @@ public class PacketReceiveProcessEvent extends PacketEvent implements PacketIds{
     private void onRun(){
         new Thread(() -> {
             try {
-                Thread.sleep(3);
+                Thread.sleep(1);
             } catch (Exception e){
                 console.addText("Erro: " + e.getMessage());
             }

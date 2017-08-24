@@ -1,6 +1,6 @@
 package caelum.first.utils;
 
-public interface PacketIds {
+public interface PacketIds extends PacketSubIds{
 
     int TYPE_BATCH = -1;
     String NAME_BATCH = "BatchPacket";

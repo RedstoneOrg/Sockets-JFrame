@@ -61,15 +61,20 @@ public class Console extends JFrame {
     }
 
     public void addText(String text){
+        addText(text, 1);
+    }
+
+    public void addText(String text, int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String addText = "";
         addText += textArea.getText();
-        if(area.equals("")){
-            addText += text;
-            area = addText;
-        } else {
-            addText += "\n" + text;
-            area = addText;
-        }
+        addText += "\n" + text;
+        area = addText;
         textArea.setText(addText);
     }
 
